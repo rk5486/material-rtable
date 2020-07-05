@@ -120,7 +120,7 @@ EnhancedTableHead.propTypes = {
     if (props[propName] && !props['columns'].find(x => x.fieldName === props[propName]))
       throw new Error(`Invalid orderBy: column [${props[propName]}] not exits`);
   },
-  
+
   order: PropTypes.oneOf(['asc', 'desc']),
   onRequestSort: PropTypes.func,
 

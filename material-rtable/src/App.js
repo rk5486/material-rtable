@@ -43,7 +43,7 @@ const App = () => {
           <Paper className={classes.root}>
             <RTable
               rows={getRows()}
-              tableTitle='Sample Table'
+              tableTitle='Sample Table 1'
               canSelectMultiple
               showActionColumn
               customActions={actions}
