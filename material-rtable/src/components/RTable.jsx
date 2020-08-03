@@ -177,8 +177,7 @@ const EnhancedTableToolbar = props => {
   } = props;
 
   return (
-    <Toolbar
-      className={clsx(classes.root, { [classes.highlight]: selectedCount > 0 })}
+    <Toolbar className={clsx(classes.root, { [classes.highlight]: selectedCount > 0 })}
     >
       {selectedCount > 0 ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
@@ -318,7 +317,7 @@ const RTable = props => {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
-    <div className={classes.roort}>
+    <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar
           selectedCount={selected.length}
@@ -360,13 +359,13 @@ const RTable = props => {
                       key={rowIdx}
                       selected={isRowSelected}
                     >
-                      {canSelectMultiple ? <TableCell padding='checkbox'>
+                      {canSelectMultiple && <TableCell padding='checkbox'>
                         <Checkbox
                           checked={isRowSelected}
                           onChange={(e) => handleRowSelectedChanged(e, row)}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
-                      </TableCell> : null}
+                      </TableCell>}
 
                       {(columns ?? autoColumns).map(column => {
                         return (
@@ -379,7 +378,7 @@ const RTable = props => {
                         );
                       })}
 
-                      {customActions.length > 0 ? <TableCell key='actionCell'>
+                      {customActions.length > 0 && <TableCell key='actionCell'>
                         {customActions.map((action, actionIdx) => {
                           const actionName =
                             (action.name & action.name.trim() !== '')
@@ -393,15 +392,15 @@ const RTable = props => {
                             </Button>
                           );
                         })}
-                      </TableCell> : null}
+                      </TableCell>}
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={(columns ?? autoColumns).length + 2} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
             <TableFooter>
               <TableRow>
@@ -413,11 +412,9 @@ const RTable = props => {
                   page={page}
                   SelectProps={{
                     inputProps: { 'aria-label': 'rows per page' },
-                    native: true,
                   }}
                   onChangePage={handleChangePage}
                   onChangeRowsPerPage={handleChangeRowsPerPage}
-                // ActionsComponent={TablePaginationActions}
                 />
               </TableRow>
             </TableFooter>
